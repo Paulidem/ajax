@@ -1,0 +1,92 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+ <style>
+.bulleTitre{
+background-color:#FFE677;
+border-radius:5px;
+border:1px solid black;
+color:black;
+width:100%;
+height:20px;
+padding-left:5px;
+opacity:0.8;
+display:none;
+}	
+
+.info{
+display:none;
+}
+ </style> 
+ 
+ 
+ </head>
+ 
+ <body>
+ <input type="button" onclick= "afficher('suivant')" value="suivant"/>
+ <input type="button" onclick= "afficher('precedent')" value="precedent"/>
+ 
+ 
+ 
+ </body>
+ 
+ 
+ <script>
+   var i=0;
+   var y=0;
+   var xml;
+   var  contenu = $.ajax("rss.xml").done(function(data) { 
+      $(data).find("item").each(
+        function (){
+		
+         // alert($(this).children("title").text());
+		  $("body").append("<div id='titre"+i+"' class='bulleTitre'>"+$(this).children("title").text()+"</div>");
+		  $("body").append("<div id='info"+i+"' class='info'>"+$(this).children("description").text()+"</div>");
+		  i++;	
+        }
+        );  
+		$("#titre0").show();
+		$("#info0").show();
+    }).fail(function() { alert("error"); });
+	
+
+											
+function afficher(boutton)
+{
+if(boutton=='suivant' && y< (i-1))
+	{
+	
+	y++;
+	var z=y-1;
+	$("#titre"+z).hide();
+	$("#info"+z).hide();
+	$("#titre"+y).show();
+	$("#info"+y).show();
+
+	}
+	else if(boutton=='precedent' && y>0)
+	{
+	y--;
+	var z=y+1;
+	$("#titre"+z).hide();
+	$("#info"+z).hide();
+	$("#titre"+y).show();
+	$("#info"+y).show();
+
+
+	}
+}
+ 
+
+
+ </script>
+</head>
+
+<body  > 
+  
+
+
+</body></html>

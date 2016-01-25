@@ -1,0 +1,70 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="jquery.jshowoff.min.js"></script>
+
+<link href="jshowoff.css" rel="stylesheet" />
+ <style>
+  p span {
+    color:red;
+
+  } 
+  .infobulle{
+    position:absolute;
+    width: 200px;
+    background-color:#fff;
+    border:1px solid red;
+    display:none;
+  }
+ </style> 
+ <script> 
+    var listeItem;
+   var  contenu = $.ajax("rss.xml").done(function(data) { 
+        listeItem=$(data).find("item");
+
+      for(i=0; i<listeItem.length; i++){
+        $("#features").append("<div><h2>"+listeItem.eq(i).children("title").text()+"</h2><p>"+listeItem.eq(i).children("description").text()+"</p></div>");
+      }
+      $('#features').jshowoff();
+
+         
+
+
+
+
+    }).fail(function() { alert("error"); });
+ 
+
+
+ </script>
+ <style>
+#titre, #descr{
+  background-color:#000;
+  color:green;
+  font-family: Arial ;
+  font-size: 18pt ;
+
+
+}
+
+
+ </style>
+</head>
+
+<body  > 
+  <div id="titre">test</div>
+  <div id="descr">test</div>
+
+
+<div id="features"> 
+
+
+
+
+
+</div>  
+
+</body></html>
